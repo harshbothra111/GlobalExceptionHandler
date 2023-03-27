@@ -16,26 +16,25 @@ namespace Data.Repository
         {
             _context = context;
         }
-        public async Task<Claim> AddClaimAsync(Claim claim)
+        public async Task AddClaimAsync(Claim claim)
         {
             await _context.Claims.AddAsync(claim);
             await _context.SaveChangesAsync();
-            return claim;
         }
 
-        public async Task<Claim> GetClaimByIdAsync(int id)
+        public IQueryable<Claim> GetClaimById(int id)
         {
-            return await _context.Claims.FindAsync(id); 
+            return _context.Claims.Where(x=>x.Id == id); 
         }
 
-        public async Task<IEnumerable<Claim>> GetClaimsAsync()
+        public IQueryable<Claim> GetClaims()
         {
-            return await _context.Claims.ToListAsync();
+            return _context.Claims;
         }
 
         public async Task UpdateClaimAsync(Claim claim)
         {
-            _context.Entry(claim).State = EntityState.Modified;
+            _context.Update(claim);
             await _context.SaveChangesAsync();
         }
     }

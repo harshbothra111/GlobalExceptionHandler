@@ -32,16 +32,18 @@ namespace API.Controllers
 
         // POST api/<ClaimsController>
         [HttpPost]
-        public async Task<Claim> Post(Claim claim)
+        public async Task<ActionResult> Post(Claim claim)
         {
-            return await _claimsManager.AddClaimAsync(claim);
+            await _claimsManager.AddClaimAsync(claim);
+            return Ok();
         }
 
         // PUT api/<ClaimsController>/5
         [HttpPut]
-        public async Task Put(Claim claim)
+        public async Task<ActionResult> Put(Claim claim)
         {
             await _claimsManager.UpdateClaimAsync(claim);
+            return Ok();
         }
     }
 }
