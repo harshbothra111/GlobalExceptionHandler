@@ -1,10 +1,5 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Repository
 {
@@ -18,25 +13,25 @@ namespace Data.Repository
         }
         public async Task<Policy> AddPolicyAsync(Policy claim)
         {
-            await _context.Policies.AddAsync(claim);
-            await _context.SaveChangesAsync();
+            await _context.Policies.AddAsync(claim).ConfigureAwait(true);
+            await _context.SaveChangesAsync().ConfigureAwait(true);
             return claim;
         }
 
         public async Task<Policy> GetPolicyByIdAsync(int id)
         {
-            return await _context.Policies.FindAsync(id); 
+            return await _context.Policies.FindAsync(id).ConfigureAwait(true);
         }
 
         public async Task<IEnumerable<Policy>> GetPolicysAsync()
         {
-            return await _context.Policies.ToListAsync();
+            return await _context.Policies.ToListAsync().ConfigureAwait(true);
         }
 
         public async Task UpdatePolicyAsync(Policy claim)
         {
             _context.Entry(claim).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(true);
         }
     }
 }

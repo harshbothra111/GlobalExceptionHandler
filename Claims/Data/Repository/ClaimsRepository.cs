@@ -1,10 +1,4 @@
 ﻿using Domain;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Repository
 {
@@ -24,7 +18,7 @@ namespace Data.Repository
 
         public IQueryable<Claim> GetClaimById(int id)
         {
-            return _context.Claims.Where(x=>x.Id == id); 
+            return _context.Claims.Where(x => x.Id == id);
         }
 
         public IQueryable<Claim> GetClaims()

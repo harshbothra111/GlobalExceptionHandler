@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace Errors
 {
@@ -15,7 +9,7 @@ namespace Errors
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionLoggingMiddleware> _logger;
-        private const string ContentType = "application/json";
+        private const string _contentType = "application/json";
 
         public ExceptionLoggingMiddleware(RequestDelegate next, ILogger<ExceptionLoggingMiddleware> logger)
         {
@@ -33,7 +27,7 @@ namespace Errors
             {
                 _logger.LogError(ex, "Exception has been thrown");
 
-                httpContext.Response.ContentType = ContentType;
+                httpContext.Response.ContentType = _contentType;
                 httpContext.Response.StatusCode = GetHttpStatusCode(ex);
 
                 var exceptionMessage = FormatErrorMessage(ex);

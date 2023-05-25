@@ -1,7 +1,6 @@
 using Data.Repository;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 
 namespace Data.Tests
 {
@@ -39,8 +38,13 @@ namespace Data.Tests
         public void GetClaimsByIdShouldReturnData()
         {
             Claim claim = new() { Id = 1, Name = "Claim 1" };
-            Assert.That(_mockClaimsRepo.GetClaimById(1).First().Name, Is.EqualTo(claim.Name));
+            Assert.Multiple(() =>
+            {
+                Assert.That(_mockClaimsRepo.GetClaimById(1).First().Name, Is.EqualTo(claim.Name));
+                Assert.That(_mockClaimsRepo.GetClaimById(1).First().Id, Is.EqualTo(claim.Id));
+            });
         }
+
         [Test, Order(2)]
         public async Task CanInsertClaim()
         {

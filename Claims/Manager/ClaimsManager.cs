@@ -1,13 +1,7 @@
-﻿using Data;
-using Data.Repository;
+﻿using Data.Repository;
 using Domain;
 using Errors;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Manager
 {
@@ -38,7 +32,7 @@ namespace Manager
 
         public async Task UpdateClaimAsync(Claim claim)
         {
-           await _repository.UpdateClaimAsync(claim);
+            await _repository.UpdateClaimAsync(claim);
         }
     }
 }
